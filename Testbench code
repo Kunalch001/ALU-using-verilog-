@@ -1,0 +1,30 @@
+module ALU_tb;
+
+reg [3:0] A;
+reg [3:0] B;
+reg [2:0] OpCode;
+wire [7:0] Result;
+wire Zero;
+wire Carry;
+ALU uut (
+    .A(A),
+    .B(B),
+    .OpCode(OpCode),
+    .Result(Result),
+    .Zero(Zero),
+    .Carry(Carry)
+);
+initial begin
+    $monitor("Time: %0d, A: %b, B: %b, OpCode: %b, Result: %b, Zero: %b, Carry: %b", $time, A, B, OpCode, Result, Zero, Carry);
+    
+    A = 4'b0011; B = 4'b0101; OpCode = 3'b000; #10;
+    A = 4'b1010; B = 4'b0100; OpCode = 3'b001; #10;
+    A = 4'b0011; B = 4'b0010; OpCode = 3'b010; #10;
+    A = 4'b1000; B = 4'b0010; OpCode = 3'b011; #10;
+    A = 4'b0011; B = 4'b0100; OpCode = 3'b100; #10;
+    A = 4'b0101; B = 4'b0011; OpCode = 3'b101; #10;
+    A = 4'b0000; B = 4'b0000; OpCode = 3'b000; #10;
+    A = 4'b1111; B = 4'b0001; OpCode = 3'b000; #10;
+    $finish;
+end
+endmodule
